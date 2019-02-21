@@ -20,7 +20,7 @@ import java.net.InetAddress;
 @EnableElasticsearchRepositories(basePackages = "org.training.elk")
 @ComponentScan(basePackages = { "org.training.elk" })
 public class EsConfig {
-
+  
     @Value("${elasticsearch.home:D:\\Public\\elasticsearch-6.3.2\\bin\\elasticsearch}")
     private String elasticsearchHome;
 
@@ -35,7 +35,7 @@ public class EsConfig {
     	          .put("path.home", elasticsearchHome)
     	          .put("cluster.name", clusterName).build();
     	        TransportClient client = new PreBuiltTransportClient(elasticsearchSettings);
-    	        client.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+    	        client.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
     	        return client;
     }
 

@@ -27,7 +27,7 @@ public class JavaElkApplication {
 	}
 
 	@GetMapping("/findAll")
-	public Iterable<JiraBugs> findAllCustomers() {
+	public Iterable<JiraBugs> findAllJiraBugs() {
 		return repository.findAll();
 	}
 

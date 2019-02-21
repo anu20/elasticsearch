@@ -7,6 +7,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class JiraBugs {
 	@Id
 	private String id;
+	public JiraBugs() {
+		super();
+	}
 	private String summary;
 	private String status;
 	public String getId() {
