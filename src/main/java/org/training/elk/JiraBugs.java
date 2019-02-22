@@ -7,59 +7,44 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class JiraBugs {
 	@Id
 	private String issue_key;
-	private String issue_type;
-	private String summary;
-	private String status;
 	private String project_key;
 	private String project_name;
-	private String project_type;
+	private String summary;
+	private String labels;
+	private String issue_type;
 	private String assignee;
+	private String description;
+	private String status;
 	private String reporter;
-	private String created_date;
-	private String updated_date;
+	private String created;
+	private String updated;
+	private String comments;
 	public JiraBugs() {
 		super();
 	}
-	public JiraBugs(String summary, String issue_key, String issue_type, String status,
-			String project_key, String project_name, String project_type, String assignee, String reporter,
-			String created_date, String updated_date) {
+	public JiraBugs(String issue_key, String project_key, String project_name, String summary, String labels,
+			String issue_type, String assignee, String description, String status, String reporter, String created,
+			String updated, String comments) {
 		super();
-		this.issue_type = issue_type;
-		this.summary = summary;
 		this.issue_key = issue_key;
-		this.status = status;
 		this.project_key = project_key;
 		this.project_name = project_name;
-		this.project_type = project_type;
-		this.assignee = assignee;
-		this.reporter = reporter;
-		this.created_date = created_date;
-		this.updated_date = updated_date;
-	}
-	
-	public String getIssue_type() {
-		return issue_type;
-	}
-	public void setIssue_type(String issue_type) {
-		this.issue_type = issue_type;
-	}
-	public String getSummary() {
-		return summary;
-	}
-	public void setSummary(String summary) {
 		this.summary = summary;
+		this.labels = labels;
+		this.issue_type = issue_type;
+		this.assignee = assignee;
+		this.description = description;
+		this.status = status;
+		this.reporter = reporter;
+		this.created = created;
+		this.updated = updated;
+		this.comments = comments;
 	}
 	public String getIssue_key() {
 		return issue_key;
 	}
 	public void setIssue_key(String issue_key) {
 		this.issue_key = issue_key;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	public String getProject_key() {
 		return project_key;
@@ -73,11 +58,23 @@ public class JiraBugs {
 	public void setProject_name(String project_name) {
 		this.project_name = project_name;
 	}
-	public String getProject_type() {
-		return project_type;
+	public String getSummary() {
+		return summary;
 	}
-	public void setProject_type(String project_type) {
-		this.project_type = project_type;
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	public String getLabels() {
+		return labels;
+	}
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+	public String getIssue_type() {
+		return issue_type;
+	}
+	public void setIssue_type(String issue_type) {
+		this.issue_type = issue_type;
 	}
 	public String getAssignee() {
 		return assignee;
@@ -85,23 +82,41 @@ public class JiraBugs {
 	public void setAssignee(String assignee) {
 		this.assignee = assignee;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getReporter() {
 		return reporter;
 	}
 	public void setReporter(String reporter) {
 		this.reporter = reporter;
 	}
-	public String getCreated_date() {
-		return created_date;
+	public String getCreated() {
+		return created;
 	}
-	public void setCreated_date(String created_date) {
-		this.created_date = created_date;
+	public void setCreated(String created) {
+		this.created = created;
 	}
-	public String getUpdated_date() {
-		return updated_date;
+	public String getUpdated() {
+		return updated;
 	}
-	public void setUpdated_date(String updated_date) {
-		this.updated_date = updated_date;
+	public void setUpdated(String updated) {
+		this.updated = updated;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 }
