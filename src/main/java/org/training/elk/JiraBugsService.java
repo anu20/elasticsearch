@@ -2,6 +2,7 @@ package org.training.elk;
 
 import java.util.List;
 
+import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -21,15 +22,17 @@ public class JiraBugsService {
 		QueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("summary", summary))
 				.must(QueryBuilders.matchQuery("status", status));
 		NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(query).build();
+		
 		List<JiraBugs> jiraBugs = template.queryForList(nativeSearchQuery, JiraBugs.class);
 		return jiraBugs;
 	}
 	
-	public List<JiraBugs> getJiraBugsSerachData(String input) {
-		String search = ".*" + input + ".*";
+	public List<JiraBugs> getJiraBugsSearchData(String input) {
+		
 		SearchQuery searchQuery = new NativeSearchQueryBuilder()
-				.withFilter(QueryBuilders.regexpQuery("sumamry", search)).build();
+				.withFilter(QueryBuilders.matchQuery("summary", input)).build();
 		List<JiraBugs> jiraBugs = template.queryForList(searchQuery, JiraBugs.class);
+		System.out.println(template);
 		return jiraBugs;
 
 	}
@@ -37,6 +40,9 @@ public class JiraBugsService {
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(text)
 				.field("summary").field("status").type(MultiMatchQueryBuilder.Type.BEST_FIELDS)).build();
 		List<JiraBugs> jiraBugs = template.queryForList(searchQuery, JiraBugs.class);
+		System.out.println();
+		
+
 		return jiraBugs;
 	}
 }

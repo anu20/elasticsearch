@@ -20,8 +20,8 @@ public class JiraBugsController {
 	}
 
 	@GetMapping("/customSearch/{summary}")
-	public List<JiraBugs> getCustomerByField(@PathVariable String summary) {
-		return service.getJiraBugsSerachData(summary);
+	public List<JiraBugs> getJiraBugsByField(@PathVariable String summary) {
+		return service.getJiraBugsSearchData(summary);
 	}
 
 	@GetMapping("/search/{text}")

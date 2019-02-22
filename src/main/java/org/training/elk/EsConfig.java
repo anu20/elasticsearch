@@ -31,14 +31,14 @@ public class EsConfig {
     @Bean
     public Client client() throws Exception {
     	Settings elasticsearchSettings = Settings.builder()
+    			  .put("http.enabled", "true")
     	          .put("client.transport.sniff", true)
     	          .put("path.home", elasticsearchHome)
     	          .put("cluster.name", clusterName).build();
     	        TransportClient client = new PreBuiltTransportClient(elasticsearchSettings);
-    	        client.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
+    	        client.addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
     	        return client;
     }
-
  
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
