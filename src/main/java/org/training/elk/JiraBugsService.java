@@ -6,6 +6,9 @@ import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
@@ -37,9 +40,11 @@ public class JiraBugsService {
 
 	}
 	public List<JiraBugs> multiMatchQuery(String text) {
+		
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(text)
-				.field("summary").field("status").type(MultiMatchQueryBuilder.Type.BEST_FIELDS)).build();
+				.field("summary").field("status").type(MultiMatchQueryBuilder.Type.BEST_FIELDS)).withSort(SortBuilders.scoreSort().order(SortOrder.DESC)).build();
 		List<JiraBugs> jiraBugs = template.queryForList(searchQuery, JiraBugs.class);
+		
 		System.out.println();
 		
 
