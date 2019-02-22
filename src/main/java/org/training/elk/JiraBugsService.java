@@ -38,9 +38,8 @@ public class JiraBugsService {
 	public List<JiraBugs> multiMatchQuery(String text) {
 		
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(text)
-				.field("description").field("summary").field("status").type(MultiMatchQueryBuilder.Type.BEST_FIELDS).minimumShouldMatch("50%").type("most_fields")).build();
+				.field("description").field("summary").field("status").type(MultiMatchQueryBuilder.Type.BEST_FIELDS).minimumShouldMatch("90%").type("most_fields")).build();
 		List<JiraBugs> jiraBugs = template.queryForList(searchQuery, JiraBugs.class);
-		
 		System.out.println();
 		
 
