@@ -3,7 +3,7 @@ package org.training.elk;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName="jirabugs",type="bugs")
+@Document(indexName="jirabugs", type="bugs")
 public class JiraBugs {
 	@Id
 	private String issue_key;

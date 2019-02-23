@@ -5,28 +5,29 @@ import java.util.List;
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 @Service
-public class JiraBugsService {
+public class ConfluenceService {
 	@Autowired
 	private ElasticsearchTemplate template;
 	
-	public List<JiraBugs> multiMatchQuery(String text) {
-			SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(text)
-					.field("description").field("summary").field("status").type(MultiMatchQueryBuilder.Type.BEST_FIELDS).minimumShouldMatch("90%").type("most_fields")).build();
-			List<JiraBugs> jiraBugs = template.queryForList(searchQuery, JiraBugs.class);
-			System.out.println();
-			
-
-			return jiraBugs;
-		} 
-	
+	public List<Confluence> multiMatchConfluenceQuery(String textData) {
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(textData).
+				field("project_name^3").field("page_name").field("link").type(MultiMatchQueryBuilder.Type.PHRASE_PREFIX).minimumShouldMatch("90%").type("most_fields")).build();
+		List<Confluence> confluence = template.queryForList(searchQuery, Confluence.class);
+		System.out.println();
+		return confluence;
+	} 
 	 
 		public static String removeStopWords(String textFile) throws Exception {
 				StringBuilder textOutput = new StringBuilder("");
@@ -44,6 +45,7 @@ public class JiraBugsService {
 				}
 				return textOutput.toString();
 
-			} 
+			}
 
+		
 }

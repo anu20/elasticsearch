@@ -19,11 +19,12 @@ public class DebugController {
 	private JiraBugsRepository repository;
 	
 	@PostMapping("/saveJiraBugs")
-	public int saveCustomer(@RequestBody List<JiraBugs> jiraBugs) {
+	public int saveJiraBugs(@RequestBody List<JiraBugs> jiraBugs) {
 		repository.saveAll(jiraBugs);
 		return jiraBugs.size();
 	}
 	
+
 	@GetMapping("/findAll")
 	public Iterable<JiraBugs> findAllJiraBugs() {
 		return repository.findAll();
@@ -34,7 +35,7 @@ public class DebugController {
 		return repository.findByStatus(status);
 	}
 	
-	@DeleteMapping("/deleteAll") 
+	@DeleteMapping("/deleteAllJira") 
 	public void deleteAll() {
 		repository.deleteAll();
 	}

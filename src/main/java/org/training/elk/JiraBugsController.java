@@ -16,18 +16,17 @@ public class JiraBugsController {
 	@Autowired
 	private JiraBugsService service;
 
-	@GetMapping("/serachMultiField/{summary}/{status}")
-	public List<JiraBugs> serachByMultiField(@PathVariable String summary, @PathVariable String status) {
-		return service.searchMultiField(summary, status);
-	}
-
-	@GetMapping("/customSearch/{summary}")
-	public List<JiraBugs> getJiraBugsByField(@PathVariable String summary) {
-		return service.getJiraBugsSearchData(summary);
-	}
-
+	
+/*
 	@GetMapping("/search/{text}")
 	public List<JiraBugs> doMultimatchQuery(@PathVariable String text) {
 		return service.multiMatchQuery(text);
 	}
+	*/
+	@GetMapping("/searchJira/{text}")
+	public List<JiraBugs> doFullStringSearch(@PathVariable String text) throws Exception{
+			String textData = service.removeStopWords(text);
+			return service.multiMatchQuery(textData);
+		} 
+
 }
